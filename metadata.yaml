@@ -1,5 +1,5 @@
 homepage: "https://oneprivacy.io"
 documentation: "https://docs.oneprivacy.io/docs/install/installing-with-google-tag-manager"
 versions:
-  - sha: PENDING_FIRST_COMMIT_SHA
+  - sha: 26ddd5c9903b248876de37a7f93f4f2eaead5acb
     changeNotes: Initial release.
