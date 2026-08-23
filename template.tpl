@@ -1,4 +1,4 @@
-___TERMS_OF_SERVICE___
+﻿___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -14,13 +14,15 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "One Privacy CMP",
-  "categories": ["UTILITY"],
+  "categories": [
+    "UTILITY"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "One Privacy",
-    "thumbnail": "data:image/png;base64,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"
+    "thumbnail": "data:image/png;base64,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\u003d\u003d"
   },
-  "description": "Loads the One Privacy consent banner and sets Google Consent Mode v2 default and update states from the visitor's stored consent.",
+  "description": "Loads the One Privacy consent banner and sets Google Consent Mode v2 default and update states from the visitor\u0027s stored consent.",
   "containerContexts": [
     "WEB"
   ]
@@ -50,7 +52,7 @@ ___TEMPLATE_PARAMETERS___
     "selectItems": [
       {
         "value": "live",
-        "displayValue": "Production"
+        "displayValue": "Live (Production)"
       },
       {
         "value": "test",
@@ -59,7 +61,7 @@ ___TEMPLATE_PARAMETERS___
     ],
     "simpleValueType": true,
     "defaultValue": "live",
-    "help": "Production loads the banner you published to Live. Test loads the banner you published to Test, for staging sites."
+    "help": "Live loads the banner you published to Live. Test loads the banner you published to Test, for staging sites."
   },
   {
     "type": "GROUP",
@@ -75,10 +77,13 @@ ___TEMPLATE_PARAMETERS___
         "defaultValue": 500,
         "valueValidators": [
           {
+            "type": "NON_EMPTY"
+          },
+          {
             "type": "POSITIVE_NUMBER"
           }
         ],
-        "help": "How long Google tags wait for the visitor's consent choice before they run with the default state."
+        "help": "How long Google tags wait for the visitor\u0027s consent choice before they run with the default state."
       },
       {
         "type": "CHECKBOX",
@@ -116,6 +121,7 @@ const GROUP_FUNCTIONAL = 'C0002';
 const GROUP_PERFORMANCE = 'C0003';
 const GROUP_TARGETING = 'C0004';
 const SDK_BASE = 'https://api.oneprivacy.io/consent/v1/';
+const DEVELOPER_ID = 'developer_id.dZjIxNT';
 
 // Reads the consent groups the visitor already chose, for example "C0001,C0003".
 const readStoredGroups = () => {
@@ -147,6 +153,8 @@ const toConsentState = (groups) => {
     security_storage: 'granted'
   };
 };
+
+gtagSet(DEVELOPER_ID, true);
 
 if (data.adsDataRedaction) {
   gtagSet('ads_data_redaction', true);
@@ -465,6 +473,10 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
+                "string": "developer_id.dZjIxNT"
+              },
+              {
+                "type": 1,
                 "string": "ads_data_redaction"
               },
               {
@@ -512,9 +524,109 @@ ___WEB_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
+scenarios:
+- name: Denies every storage type when the visitor has no stored consent
+  code: |-
+    mock('getCookieValues', []);
+
+    runCode(mockData);
+
+    assertApi('setDefaultConsentState').wasCalledWith({
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    assertApi('updateConsentState').wasNotCalled();
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Declares the One Privacy developer id and the redaction settings
+  code: |-
+    mock('getCookieValues', []);
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('developer_id.dZjIxNT', true);
+    assertApi('gtagSet').wasCalledWith('ads_data_redaction', true);
+    assertApi('gtagSet').wasCalledWith('url_passthrough', true);
+- name: Leaves the redaction settings alone when both checkboxes are off
+  code: |-
+    mock('getCookieValues', []);
+    mockData.adsDataRedaction = false;
+    mockData.urlPassthrough = false;
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('developer_id.dZjIxNT', true);
+    assertApi('gtagSet').wasNotCalledWith('ads_data_redaction', true);
+    assertApi('gtagSet').wasNotCalledWith('url_passthrough', true);
+- name: Grants only analytics when the stored consent holds the performance group
+  code: |-
+    mock('getCookieValues', ['groups=C0001%2CC0003&createdAt=2026-08-23T00:00:00.000Z']);
+
+    runCode(mockData);
+
+    assertApi('updateConsentState').wasCalledWith({
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'granted',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted'
+    });
+- name: Grants every purpose when the stored consent holds all four groups
+  code: |-
+    mock('getCookieValues', ['groups=C0001,C0002,C0003,C0004&createdAt=2026-08-23T00:00:00.000Z']);
+
+    runCode(mockData);
+
+    assertApi('updateConsentState').wasCalledWith({
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+      functionality_storage: 'granted',
+      personalization_storage: 'granted',
+      security_storage: 'granted'
+    });
+- name: Builds the Live banner url from the project id
+  code: |-
+    mock('getCookieValues', []);
+
+    runCode(mockData);
+
+    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/live/p123abc/sdk.js');
+- name: Builds the Test banner url when the Test environment is chosen
+  code: |-
+    mock('getCookieValues', []);
+    mockData.environment = 'test';
+
+    runCode(mockData);
+
+    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/test/p123abc/sdk.js');
+setup: |-
+  let injectedUrl;
+
+  const mockData = {
+    projectId: 'p123abc',
+    environment: 'live',
+    waitForUpdate: 500,
+    adsDataRedaction: true,
+    urlPassthrough: true
+  };
+
+  mock('injectScript', (url, onSuccess) => {
+    injectedUrl = url;
+    onSuccess();
+  });
 
 
 ___NOTES___
 
 Created on 8/23/2026
+
+
