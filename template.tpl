@@ -180,7 +180,7 @@ if (storedGroups) {
   updateConsentState(toConsentState(storedGroups));
 }
 
-const scriptUrl = SDK_BASE + data.environment + '/' + data.projectId + '/sdk.js';
+const scriptUrl = SDK_BASE + data.environment + '/' + data.projectId + '/sdk.js?source=gtm-template';
 injectScript(scriptUrl, data.gtmOnSuccess, data.gtmOnFailure, scriptUrl);
 
 
@@ -599,7 +599,7 @@ scenarios:
 
     runCode(mockData);
 
-    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/live/p123abc/sdk.js');
+    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/live/p123abc/sdk.js?source=gtm-template');
 - name: Builds the Test banner url when the Test environment is chosen
   code: |-
     mock('getCookieValues', []);
@@ -607,7 +607,7 @@ scenarios:
 
     runCode(mockData);
 
-    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/test/p123abc/sdk.js');
+    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/test/p123abc/sdk.js?source=gtm-template');
 setup: |-
   let injectedUrl;
 
