@@ -5,11 +5,13 @@ A Google Tag Manager custom template that loads the [One Privacy](https://onepri
 ## What the tag does
 
 1. Identifies One Privacy to Google with the CMP developer ID `dZjIxNT`, then sets `ads_data_redaction` and `url_passthrough`, all through `gtagSet`.
-2. Calls `setDefaultConsentState` with every storage type denied, except `security_storage`, and a `wait_for_update` delay.
+2. Calls `setDefaultConsentState` once per row of the **Default Consent Settings** table, with the row's regions and a `wait_for_update` delay. With no rows it denies every storage type, except `security_storage`, for every visitor.
 3. Reads the `onePrivacyConsent` cookie. If the visitor already made a choice, it calls `updateConsentState` right away so returning visitors keep their settings before any tag runs.
 4. Injects the One Privacy banner script for your project.
 
 After the visitor accepts or rejects, the banner sends a Consent Mode update of its own, so Google tags follow the new choice without a second tag in the container.
+
+The banner script is loaded with `?source=gtm-template`, so it does not send its own consent default, `ads_data_redaction`, `url_passthrough`, or developer ID. The template owns those, and the settings above are the only ones that apply.
 
 ## Consent categories
 
@@ -28,8 +30,10 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 2. In Google Tag Manager, open your container and go to **Tags → New**.
 3. Choose **One Privacy CMP** from the gallery.
 4. Paste your project ID and pick the environment. Use **Live (Production)** for a real site and **Test** for staging.
-5. Under **Triggering**, choose the built in **Consent Initialization** trigger that covers all pages. This is required, because the tag must run before every other tag.
-6. Save the tag, then click **Submit** and **Publish**.
+5. Under **Default Consent Settings**, keep the preset row (every type denied, regions `All`) or add rows per region. A common setup is the `All` row with everything denied plus one row for the regions where you show no banner with everything granted. Keep it consistent with your One Privacy geo rules.
+6. **Other Settings** holds the wait for update delay and the `ads_data_redaction` and `url_passthrough` checkboxes. The defaults suit most sites.
+7. Under **Triggering**, choose the built in **Consent Initialization** trigger that covers all pages. This is required, because the tag must run before every other tag.
+8. Save the tag, then click **Submit** and **Publish**.
 
 ## Settings
 
@@ -37,9 +41,19 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 | --- | --- | --- |
 | Project ID | none | Identifies your One Privacy project. Required. |
 | Environment | Live (Production) | Loads the banner you published to Live, or the one you published to Test. |
-| Wait for update | 500 | Milliseconds Google tags wait for the visitor's choice. |
-| Enable ads_data_redaction | on | Redacts ad identifiers while `ad_storage` is denied. |
-| Enable url_passthrough | on | Passes ad click information in URLs while storage is denied. |
+| Default Consent Settings | one row: every type denied, regions `All` | One row per group of regions with the state each consent type starts in. Regions is `All` or comma separated ISO 3166-1 / 3166-2 codes; a more specific region wins. `security_storage` is always granted. |
+| Wait for update (Other Settings) | 500 | Milliseconds Google tags wait for the visitor's choice. |
+| Enable ads_data_redaction (Other Settings) | on | Redacts ad identifiers while `ad_storage` is denied. |
+| Enable url_passthrough (Other Settings) | on | Passes ad click information in URLs while storage is denied. |
+
+## Permissions
+
+| Permission | Scope |
+| --- | --- |
+| Accesses consent state | Read and write for `ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`, `functionality_storage`, `personalization_storage`, `security_storage`, and `wait_for_update`. |
+| Writes to data layer | `ads_data_redaction`, `url_passthrough`, `developer_id.dZjIxNT`. |
+| Reads cookie values | `onePrivacyConsent`. |
+| Injects scripts | `https://api.oneprivacy.io/consent/v1/`. |
 
 ## Verifying
 

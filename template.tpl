@@ -65,9 +65,235 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
-    "name": "consentModeGroup",
-    "displayName": "Consent Mode",
+    "name": "defaultConsentGroup",
+    "displayName": "Default Consent Settings",
     "groupStyle": "ZIPPY_OPEN",
+    "subParams": [
+      {
+        "type": "PARAM_TABLE",
+        "name": "regionDefaults",
+        "displayName": "Default Consent Settings",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "adStorage",
+              "displayName": "ad_storage",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "analyticsStorage",
+              "displayName": "analytics_storage",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "adUserData",
+              "displayName": "ad_user_data",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "adPersonalization",
+              "displayName": "ad_personalization",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "functionalityStorage",
+              "displayName": "functionality_storage",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "SELECT",
+              "name": "personalizationStorage",
+              "displayName": "personalization_storage",
+              "macrosInSelect": false,
+              "selectItems": [
+                {
+                  "value": "granted",
+                  "displayValue": "granted"
+                },
+                {
+                  "value": "denied",
+                  "displayValue": "denied"
+                }
+              ],
+              "simpleValueType": true,
+              "defaultValue": "denied"
+            },
+            "isUnique": false
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "regions",
+              "displayName": "Regions",
+              "simpleValueType": true,
+              "defaultValue": "All",
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ],
+              "help": "All, or comma separated ISO 3166-1 country codes (DE, FR) and ISO 3166-2 codes (US-CA). A more specific region wins."
+            },
+            "isUnique": true
+          }
+        ],
+        "newRowTitle": "Add Setting",
+        "newRowButtonText": "Add Setting",
+        "editRowTitle": "Edit Setting",
+        "defaultValue": [
+          {
+            "type": 3,
+            "mapKey": [
+              {
+                "type": 1,
+                "string": "adStorage"
+              },
+              {
+                "type": 1,
+                "string": "analyticsStorage"
+              },
+              {
+                "type": 1,
+                "string": "adUserData"
+              },
+              {
+                "type": 1,
+                "string": "adPersonalization"
+              },
+              {
+                "type": 1,
+                "string": "functionalityStorage"
+              },
+              {
+                "type": 1,
+                "string": "personalizationStorage"
+              },
+              {
+                "type": 1,
+                "string": "regions"
+              }
+            ],
+            "mapValue": [
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "denied"
+              },
+              {
+                "type": 1,
+                "string": "All"
+              }
+            ]
+          }
+        ],
+        "help": "The consent state Google tags start with, before the visitor chooses. One row per group of regions. security_storage is always granted."
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "otherSettingsGroup",
+    "displayName": "Other Settings",
+    "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
         "type": "TEXT",
@@ -83,7 +309,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "POSITIVE_NUMBER"
           }
         ],
-        "help": "How long Google tags wait for the visitor\u0027s consent choice before they run with the default state."
+        "help": "How long Google tags wait for the visitor's consent choice before they run with the default state."
       },
       {
         "type": "CHECKBOX",
@@ -163,15 +389,48 @@ if (data.urlPassthrough) {
   gtagSet('url_passthrough', true);
 }
 
-setDefaultConsentState({
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  analytics_storage: 'denied',
-  functionality_storage: 'denied',
-  personalization_storage: 'denied',
-  security_storage: 'granted',
-  wait_for_update: makeInteger(data.waitForUpdate)
+const ALL_REGIONS = 'ALL';
+
+const DENY_ALL_ROW = {
+  regions: ALL_REGIONS,
+  adStorage: 'denied',
+  analyticsStorage: 'denied',
+  adUserData: 'denied',
+  adPersonalization: 'denied',
+  functionalityStorage: 'denied',
+  personalizationStorage: 'denied'
+};
+
+const parseRegions = (value) => {
+  if (!value) {
+    return [];
+  }
+  return value.split(',')
+    .map((code) => code.trim().toUpperCase())
+    .filter((code) => code.length > 0 && code !== ALL_REGIONS);
+};
+
+const toDefaultState = (row) => {
+  return {
+    ad_storage: row.adStorage,
+    ad_user_data: row.adUserData,
+    ad_personalization: row.adPersonalization,
+    analytics_storage: row.analyticsStorage,
+    functionality_storage: row.functionalityStorage,
+    personalization_storage: row.personalizationStorage,
+    security_storage: 'granted',
+    wait_for_update: makeInteger(data.waitForUpdate)
+  };
+};
+
+const regionRows = data.regionDefaults && data.regionDefaults.length > 0 ? data.regionDefaults : [DENY_ALL_ROW];
+regionRows.forEach((row) => {
+  const state = toDefaultState(row);
+  const regions = parseRegions(row.regions);
+  if (regions.length > 0) {
+    state.region = regions;
+  }
+  setDefaultConsentState(state);
 });
 
 // A returning visitor already has a choice stored. Apply it before any tag runs.
@@ -222,7 +481,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -253,7 +512,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -284,7 +543,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -315,7 +574,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -346,7 +605,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -377,7 +636,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -408,7 +667,38 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "wait_for_update"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -507,7 +797,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://api.oneprivacy.io/"
+                "string": "https://api.oneprivacy.io/consent/v1/"
               }
             ]
           }
@@ -543,6 +833,37 @@ scenarios:
     });
     assertApi('updateConsentState').wasNotCalled();
     assertApi('gtmOnSuccess').wasCalled();
+- name: Sets one default per region row and applies the region codes
+  code: |-
+    mock('getCookieValues', []);
+    mockData.regionDefaults = [
+      {regions: 'All', adStorage: 'denied', analyticsStorage: 'denied', adUserData: 'denied', adPersonalization: 'denied', functionalityStorage: 'denied', personalizationStorage: 'denied'},
+      {regions: ' us, ca ', adStorage: 'granted', analyticsStorage: 'granted', adUserData: 'granted', adPersonalization: 'granted', functionalityStorage: 'granted', personalizationStorage: 'granted'}
+    ];
+
+    runCode(mockData);
+
+    assertApi('setDefaultConsentState').wasCalledWith({
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    assertApi('setDefaultConsentState').wasCalledWith({
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+      functionality_storage: 'granted',
+      personalization_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500,
+      region: ['US', 'CA']
+    });
 - name: Declares the One Privacy developer id and the redaction settings
   code: |-
     mock('getCookieValues', []);
