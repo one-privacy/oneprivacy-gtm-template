@@ -745,7 +745,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://api.oneprivacy.io/consent/v1/"
+                "string": "https://api.oneprivacy.io/consent/v1/*"
               }
             ]
           }
