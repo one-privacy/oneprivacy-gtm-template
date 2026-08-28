@@ -30,7 +30,7 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 2. In Google Tag Manager, open your container and go to **Tags → New**.
 3. Choose **One Privacy CMP** from the gallery.
 4. Paste your project ID and pick the environment. Use **Live (Production)** for a real site and **Test** for staging.
-5. Under **Default Consent Settings**, keep the preset row (every type denied, regions `All`) or add rows per region. A common setup is the `All` row with everything denied plus one row for the regions where you show no banner with everything granted. Keep it consistent with your One Privacy geo rules.
+5. Under **Default Consent Settings**, leave the table empty to deny every type for every visitor, or add rows per region. If you add rows, include an `All` row with everything denied, because the built-in deny-all applies only while the table is empty. A common setup is that `All` row plus one row for the regions where you show no banner with everything granted. Keep it consistent with your One Privacy geo rules.
 6. **Other Settings** holds the wait for update delay and the `ads_data_redaction` and `url_passthrough` checkboxes. The defaults suit most sites.
 7. Under **Triggering**, choose the built in **Consent Initialization** trigger that covers all pages. This is required, because the tag must run before every other tag.
 8. Save the tag, then click **Submit** and **Publish**.
@@ -41,7 +41,7 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 | --- | --- | --- |
 | Project ID | none | Identifies your One Privacy project. Required. |
 | Environment | Live (Production) | Loads the banner you published to Live, or the one you published to Test. |
-| Default Consent Settings | one row: every type denied, regions `All` | One row per group of regions with the state each consent type starts in. Regions is `All` or comma separated ISO 3166-1 / 3166-2 codes; a more specific region wins. `security_storage` is always granted. |
+| Default Consent Settings | empty (every type denied, regions `All`) | One row per group of regions with the state each consent type starts in. Regions is `All` or comma separated ISO 3166-1 / 3166-2 codes; a more specific region wins. `security_storage` is always granted. |
 | Send Consent Mode default and update commands (Other Settings) | on | Off stops every Consent Mode command from the tag and the banner. Block Google tags until consent with the `one-privacy-consent-updated` dataLayer event instead. |
 | Wait for update (Other Settings) | 500 | Milliseconds Google tags wait for the visitor's choice. |
 | Enable ads_data_redaction (Other Settings) | on | Redacts ad identifiers while `ad_storage` is denied. |
