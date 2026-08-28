@@ -1,6 +1,8 @@
 homepage: "https://oneprivacy.io"
 documentation: "https://docs.oneprivacy.io/docs/install/installing-with-google-tag-manager"
 versions:
+  - sha: 18e4913a45bc062fbf5efcfae5f970bdf4973b45
+    changeNotes: Fix the inject_script permission so the banner script URL is allowed.
   - sha: 00fe6a1e5d0e4b5247537dd496fae99c0e580a75
     changeNotes: Default Consent Settings table starts empty. With no rows every type is denied for all regions.
   - sha: 97f6310eb188ade052618b99c38e652dc1d43a31
