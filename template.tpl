@@ -296,6 +296,14 @@ ___TEMPLATE_PARAMETERS___
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
+        "type": "CHECKBOX",
+        "name": "consentModeCommands",
+        "checkboxText": "Send Consent Mode default and update commands",
+        "simpleValueType": true,
+        "defaultValue": true,
+        "help": "Turn off to stop every Google Consent Mode command from this tag and from the banner. Google tags then get no consent state from One Privacy; block them until consent with the one-privacy-consent-updated dataLayer event."
+      },
+      {
         "type": "TEXT",
         "name": "waitForUpdate",
         "displayName": "Wait for update (milliseconds)",
@@ -380,13 +388,16 @@ const toConsentState = (groups) => {
   };
 };
 
-gtagSet(DEVELOPER_ID, true);
+const consentModeEnabled = data.consentModeCommands !== false;
 
-if (data.adsDataRedaction) {
-  gtagSet('ads_data_redaction', true);
-}
-if (data.urlPassthrough) {
-  gtagSet('url_passthrough', true);
+if (consentModeEnabled) {
+  gtagSet(DEVELOPER_ID, true);
+  if (data.adsDataRedaction) {
+    gtagSet('ads_data_redaction', true);
+  }
+  if (data.urlPassthrough) {
+    gtagSet('url_passthrough', true);
+  }
 }
 
 const ALL_REGIONS = 'ALL';
@@ -423,23 +434,25 @@ const toDefaultState = (row) => {
   };
 };
 
-const regionRows = data.regionDefaults && data.regionDefaults.length > 0 ? data.regionDefaults : [DENY_ALL_ROW];
-regionRows.forEach((row) => {
-  const state = toDefaultState(row);
-  const regions = parseRegions(row.regions);
-  if (regions.length > 0) {
-    state.region = regions;
-  }
-  setDefaultConsentState(state);
-});
+if (consentModeEnabled) {
+  const regionRows = data.regionDefaults && data.regionDefaults.length > 0 ? data.regionDefaults : [DENY_ALL_ROW];
+  regionRows.forEach((row) => {
+    const state = toDefaultState(row);
+    const regions = parseRegions(row.regions);
+    if (regions.length > 0) {
+      state.region = regions;
+    }
+    setDefaultConsentState(state);
+  });
 
-// A returning visitor already has a choice stored. Apply it before any tag runs.
-const storedGroups = readStoredGroups();
-if (storedGroups) {
-  updateConsentState(toConsentState(storedGroups));
+  // A returning visitor already has a choice stored. Apply it before any tag runs.
+  const storedGroups = readStoredGroups();
+  if (storedGroups) {
+    updateConsentState(toConsentState(storedGroups));
+  }
 }
 
-const scriptUrl = SDK_BASE + data.environment + '/' + data.projectId + '/sdk.js?source=gtm-template';
+const scriptUrl = SDK_BASE + data.environment + '/' + data.projectId + '/sdk.js?source=gtm-template' + (consentModeEnabled ? '' : '&consentMode=off');
 injectScript(scriptUrl, data.gtmOnSuccess, data.gtmOnFailure, scriptUrl);
 
 
@@ -864,6 +877,18 @@ scenarios:
       wait_for_update: 500,
       region: ['US', 'CA']
     });
+- name: Sends no Consent Mode command and flags the banner script when the commands checkbox is off
+  code: |-
+    mock('getCookieValues', ['groups=C0001,C0002,C0003,C0004&createdAt=2026-08-23T00:00:00.000Z']);
+    mockData.consentModeCommands = false;
+
+    runCode(mockData);
+
+    assertApi('setDefaultConsentState').wasNotCalled();
+    assertApi('updateConsentState').wasNotCalled();
+    assertApi('gtagSet').wasNotCalled();
+    assertThat(injectedUrl).isEqualTo('https://api.oneprivacy.io/consent/v1/live/p123abc/sdk.js?source=gtm-template&consentMode=off');
+    assertApi('gtmOnSuccess').wasCalled();
 - name: Declares the One Privacy developer id and the redaction settings
   code: |-
     mock('getCookieValues', []);
@@ -936,6 +961,7 @@ setup: |-
     projectId: 'p123abc',
     environment: 'live',
     waitForUpdate: 500,
+    consentModeCommands: true,
     adsDataRedaction: true,
     urlPassthrough: true
   };

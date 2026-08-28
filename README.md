@@ -42,6 +42,7 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 | Project ID | none | Identifies your One Privacy project. Required. |
 | Environment | Live (Production) | Loads the banner you published to Live, or the one you published to Test. |
 | Default Consent Settings | one row: every type denied, regions `All` | One row per group of regions with the state each consent type starts in. Regions is `All` or comma separated ISO 3166-1 / 3166-2 codes; a more specific region wins. `security_storage` is always granted. |
+| Send Consent Mode default and update commands (Other Settings) | on | Off stops every Consent Mode command from the tag and the banner. Block Google tags until consent with the `one-privacy-consent-updated` dataLayer event instead. |
 | Wait for update (Other Settings) | 500 | Milliseconds Google tags wait for the visitor's choice. |
 | Enable ads_data_redaction (Other Settings) | on | Redacts ad identifiers while `ad_storage` is denied. |
 | Enable url_passthrough (Other Settings) | on | Passes ad click information in URLs while storage is denied. |
