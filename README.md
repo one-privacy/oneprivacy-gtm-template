@@ -54,7 +54,7 @@ The banner groups cookies into four categories. The tag maps them to Consent Mod
 | Accesses consent state | Read and write for `ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`, `functionality_storage`, `personalization_storage`, `security_storage`, and `wait_for_update`. |
 | Writes to data layer | `ads_data_redaction`, `url_passthrough`, `developer_id.dZjIxNT`. |
 | Reads cookie values | `onePrivacyConsent`. |
-| Injects scripts | `https://api.oneprivacy.io/consent/v1/`. |
+| Injects scripts | `https://api.oneprivacy.io/consent/v1/*`. |
 
 ## Verifying
 
