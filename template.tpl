@@ -281,6 +281,7 @@ const setDefaultConsentState = require('setDefaultConsentState');
 const updateConsentState = require('updateConsentState');
 const getCookieValues = require('getCookieValues');
 const decodeUriComponent = require('decodeUriComponent');
+const encodeUriComponent = require('encodeUriComponent');
 const injectScript = require('injectScript');
 const gtagSet = require('gtagSet');
 const makeInteger = require('makeInteger');
@@ -387,7 +388,7 @@ if (consentModeEnabled) {
   }
 }
 
-const scriptUrl = SDK_BASE + data.environment + '/' + data.projectId + '/sdk.js?source=gtm-template' + (consentModeEnabled ? '' : '&consentMode=off');
+const scriptUrl = SDK_BASE + encodeUriComponent(data.environment) + '/' + encodeUriComponent(data.projectId) + '/sdk.js?source=gtm-template' + (consentModeEnabled ? '' : '&consentMode=off');
 injectScript(scriptUrl, data.gtmOnSuccess, data.gtmOnFailure, scriptUrl);
 
 
